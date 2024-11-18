@@ -1,0 +1,16 @@
+{
+	"name": "matterwp/apollo",
+	"autoload": {
+		"psr-4": {
+			"Apollo\\Admin\\": "src/Admin/Controllers",
+			"Apollo\\Frontend\\": "src/Frontend/Controllers",
+			"Apollo\\Core\\": "src/Core/Controllers"
+		}
+	},
+	"authors": [
+		{
+			"name": "matterwp.com"
+		}
+	],
+	"require": {}
+}
