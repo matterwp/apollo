@@ -41,16 +41,11 @@ print_error() {
 # Main configuration starts
 print_header "WordPress Plugin Configurator"
 echo "Welcome! Starting plugin configuration process..."
-cd ../ # Move to root directory since we're in .dev
-echo "Running npm install..."
-npm install --silent
-
-# Run npm build:production
-print_processing "Building production assets"
-if npm run build:production --silent; then
-    print_success "Production assets built successfully"
+print_processing "Installing npm dependencies"
+if npm install --silent; then
+    print_success "NPM dependencies installed successfully"
 else
-    print_error "Failed to build production assets"
+    print_error "Failed to install NPM dependencies"
     exit 1
 fi
 
@@ -123,6 +118,15 @@ print_success "Autoloader regenerated"
 print_processing "Renaming main plugin file"
 mv apollo.php ${text_domain}.php
 print_success "Main plugin file renamed to ${text_domain}.php"
+
+# Run npm build:production
+print_processing "Building production assets"
+if npm run build:production --silent; then
+    print_success "Production assets built successfully"
+else
+    print_error "Failed to build production assets"
+    exit 1
+fi
 
 if [ "$has_frontend" = "n" ]; then
     print_header "Removing Frontend Components"
