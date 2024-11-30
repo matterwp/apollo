@@ -64,11 +64,14 @@ fi
 # Clean up the temporary file
 rm "$temp_exclude_file"
 
-# Verify the zip file was created
-if [ -f "$name.zip" ]; then
+# Create .deployment directory if it doesn't exist
+mkdir -p .deployment
+
+# Move zip file to .deployment folder
+if mv "$name.zip" .deployment/; then
     echo "Export completed successfully!"
-    echo "File location: $(pwd)/$name.zip"
+    echo "File location: $(pwd)/.deployment/$name.zip"
 else
-    echo "Error: Zip file was not created"
+    echo "Error: Failed to move zip file to .deployment folder"
     exit 1
 fi

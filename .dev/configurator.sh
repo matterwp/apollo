@@ -4,7 +4,19 @@
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
+
+echo -e "${BLUE}"
+cat << "EOF"
+     _                _ _
+    / \   _ __   ___ | | | ___
+   / _ \ | '_ \ / _ \| | |/ _ \
+  / ___ \| |_) | (_) | | | (_) |
+ /_/   \_\ .__/ \___/|_|_|\___/
+         |_|
+EOF
+echo -e "${NC}"
 
 # Print section header
 print_header() {
@@ -21,8 +33,26 @@ print_processing() {
     echo -e "${YELLOW}PROCESSING: $1${NC}"
 }
 
+# Print error message
+print_error() {
+    echo -e "${RED}ERROR: $1${NC}"
+}
+
 # Main configuration starts
 print_header "WordPress Plugin Configurator"
+echo "Welcome! Starting plugin configuration process..."
+cd ../ # Move to root directory since we're in .dev
+echo "Running npm install..."
+npm install --silent
+
+# Run npm build:production
+print_processing "Building production assets"
+if npm run build:production --silent; then
+    print_success "Production assets built successfully"
+else
+    print_error "Failed to build production assets"
+    exit 1
+fi
 
 # Ask plugin name
 echo "Enter Plugin Name (e.g. Apollo):"
@@ -79,6 +109,10 @@ print_success "Template files updated"
 print_processing "Updating composer.json"
 sed -i '' "s/\"Apollo\\\\/\"${plugin_name}\\\\/g" composer.json
 print_success "Composer.json updated"
+
+print_processing "Running composer install"
+composer install
+print_success "Composer dependencies installed"
 
 # Update autoloader
 print_processing "Regenerating autoloader"
