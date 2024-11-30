@@ -40,6 +40,8 @@ exclude=(
 		"translations.sh"
 		"vendor/bin/*"
 		"dist/mix-manifest.json"
+		"configurator.sh"
+		"package-lock.json"
 )
 
 # Create a temporary exclusion file

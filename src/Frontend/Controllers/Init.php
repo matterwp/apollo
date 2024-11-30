@@ -34,6 +34,7 @@ class Init {
 
 	/**
 	 * Instance.
+	 *
 	 * @return void
 	 */
 	public static function instance() {
@@ -44,6 +45,7 @@ class Init {
 
 	/**
 	 * Set plugin details.
+	 *
 	 * @return void
 	 */
 	private function setPluginDetails() {
@@ -53,6 +55,7 @@ class Init {
 
 	/**
 	 * Load styles and scripts.
+	 *
 	 * @return void
 	 */
 	private function loadStylesAndScripts() {
@@ -62,17 +65,19 @@ class Init {
 
 	/**
 	 * Load styles.
+	 *
 	 * @return void
 	 */
 	public function styles() {
-		wp_enqueue_style( $this->plugin_name, APOLLO_PLUGIN_URL . 'dist/css/public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, APOLLO_PLUGIN_URL . 'assets/css/public.css', array(), $this->version, 'all' );
 	}
 
 	/**
 	 * Load scripts.
+	 *
 	 * @return void
 	 */
 	public function scripts() {
-		wp_enqueue_script( $this->plugin_name, APOLLO_PLUGIN_URL . 'dist/js/public.js', array(), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, APOLLO_PLUGIN_URL . 'assets/js/public.js', array(), $this->version, true );
 	}
 }
