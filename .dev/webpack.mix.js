@@ -15,7 +15,6 @@
  */
 const mix = require('laravel-mix');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const tailwindcss = require('tailwindcss');
 const { glb } = require('laravel-mix-glob');
 const postcss = require('postcss');
 
@@ -89,7 +88,6 @@ mix
 			require('postcss-nested-ancestors'),
 			require('postcss-nested'),
 			require('postcss-import'),
-			tailwindcss('./.dev/tailwind.config.js'),
 			require('autoprefixer'),
 
 		]
@@ -120,7 +118,7 @@ mix
  */
 mix
 	.browserSync({
-		proxy: 'http://array.local',
+		proxy: 'http://matterwp.local',
 		open: 'external',
 		port: 3000,
 		files: ['*.php', 'src/**/**/*', 'templates/**/**/*'],

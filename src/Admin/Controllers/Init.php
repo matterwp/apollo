@@ -53,6 +53,7 @@ class Init {
 
 	/**
 	 * Instance of the class.
+	 *
 	 * @return void
 	 */
 	public static function instance() {
@@ -63,6 +64,7 @@ class Init {
 
 	/**
 	 * Initialize the plugin.
+	 *
 	 * @return void
 	 */
 	private function initializePlugin() {
@@ -72,39 +74,43 @@ class Init {
 
 	/**
 	 * Setup the admin actions.
+	 *
 	 * @return void
 	 */
 	private function setupAdminActions() {
-		add_action( 'admin_menu', [ $this, 'addPluginAdminMenu' ] );
-		add_filter( 'plugin_action_links_' . APOLLO_PLUGIN_BASE, [ $this, 'addActionLinks' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueStyles' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
+		add_action( 'admin_menu', array( $this, 'addPluginAdminMenu' ) );
+		add_filter( 'plugin_action_links_' . APOLLO_PLUGIN_BASE, array( $this, 'addActionLinks' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueStyles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueueScripts' ) );
 	}
 
 	/**
 	 * Enqueue the admin styles.
+	 *
 	 * @return void
 	 */
 	public function enqueueStyles() {
 		if ( ! $this->isPluginAdmin() ) {
 			return;
 		}
-		wp_enqueue_style( $this->plugin_name, APOLLO_PLUGIN_URL . 'dist/css/admin.css', [], $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, APOLLO_PLUGIN_URL . 'assets/css/admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
 	 * Enqueue the admin scripts.
+	 *
 	 * @return void
 	 */
 	public function enqueueScripts() {
 		if ( ! $this->isPluginAdmin() ) {
 			return;
 		}
-		wp_enqueue_script( $this->plugin_name, APOLLO_PLUGIN_URL . 'dist/js/admin.js', [], $this->version, true );
+		wp_enqueue_script( $this->plugin_name, APOLLO_PLUGIN_URL . 'assets/js/admin.js', array(), $this->version, true );
 	}
 
 	/**
 	 * Check if the current screen is the plugin admin.
+	 *
 	 * @return bool
 	 */
 	public function isPluginAdmin() {
@@ -113,6 +119,7 @@ class Init {
 
 	/**
 	 * Add the plugin admin menu.
+	 *
 	 * @return void
 	 */
 	public function addPluginAdminMenu() {
@@ -121,6 +128,7 @@ class Init {
 
 	/**
 	 * Add a menu page.
+	 *
 	 * @param string $title
 	 * @param string $slug
 	 * @param string $template
@@ -131,35 +139,38 @@ class Init {
 	 */
 	public function addMenuPage( $title, $slug, $template, $type = 'page', $sub = 'apollo', $priority = '99' ) {
 		$menuFunction = $this->getMenuFunction( $type );
-		$menuFunction( $title, $title, 'manage_options', $slug, [ $this, $template ], $priority );
+		$menuFunction( $title, $title, 'manage_options', $slug, array( $this, $template ), $priority );
 	}
 
 	/**
 	 * Get the menu function.
+	 *
 	 * @param string $type
 	 * @return string
 	 */
 	private function getMenuFunction( $type ) {
-		$menuFunctions = [ 
+		$menuFunctions = array(
 			'page' => 'add_options_page',
-			'sub' => 'add_submenu_page',
-			'menu' => 'add_menu_page'
-		];
+			'sub'  => 'add_submenu_page',
+			'menu' => 'add_menu_page',
+		);
 		return $menuFunctions[ $type ] ?? 'add_menu_page';
 	}
 
 	/**
 	 * Add the plugin action links.
+	 *
 	 * @param array $links
 	 * @return array
 	 */
 	public function addActionLinks( $links ) {
 		$settingsLink = '<a href="' . esc_url( get_admin_url( null, 'options-general.php?page=apollo' ) ) . '"> ' . __( 'Settings', 'apollo' ) . '</a>';
-		return array_merge( [ $settingsLink ], $links );
+		return array_merge( array( $settingsLink ), $links );
 	}
 
 	/**
 	 * Display the plugin setup page.
+	 *
 	 * @return void
 	 */
 	public function displayPluginSetupPage() {

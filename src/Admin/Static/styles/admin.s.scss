@@ -1,16 +1,17 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* Import statements would need to be handled via your build process */
 
 .settings_page_apollo {
-	@apply bg-zinc-100;
+	background-color: rgb(244, 244, 245); /* zinc-100 */
+}
 
-	#wpcontent {
-		@apply px-0;
-	}
+.settings_page_apollo #wpcontent {
+	padding-left: 0;
+	padding-right: 0;
+}
 
-	// Apollo Welcome
-	.apollo-welcome {
-		@apply flex justify-center items-center h-[calc(100vh-200px)];
-	}
+.settings_page_apollo .apollo-welcome {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - 200px);
 }

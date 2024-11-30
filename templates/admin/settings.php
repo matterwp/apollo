@@ -12,6 +12,6 @@ use Apollo\Core\Helpers;
 
 <div class="apollo-welcome">
 	<div class="welcome-content">
-		<?php Helpers::get_icon( 'apollo-outline' ) ?>
+		<h1>Welcome to Apollo.</h1>
 	</div>
 </div>
