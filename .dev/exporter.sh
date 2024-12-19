@@ -19,7 +19,6 @@ exclude=(
     ".prettierrc"
     ".stylelintrc"
     ".yarnrc.yml"
-    "composer.json"
     "composer.lock"
     ".yarn/*"
     "mix-manifest.json"
